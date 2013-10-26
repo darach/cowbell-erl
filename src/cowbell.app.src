@@ -1,0 +1,12 @@
+{application, cowbell, [
+    {description, "Noddy cowboy throughput benchmark."},
+    {vsn, "1"},
+    {modules, []},
+    {registered, [cowbell_sup]},
+    {applications, [
+        kernel,
+        stdlib,
+        cowboy ]},
+    {mod, {cowbell_app, []}},
+    {env, []}
+]}.
