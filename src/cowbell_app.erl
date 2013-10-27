@@ -16,6 +16,7 @@
 start(_Type, _Args) ->
     Dispatch = cowboy_router:compile([
         {'_', [
+           {"/bench/throughput/128b", random_data_handler, [b128]},
             {"/bench/throughput/1k", random_data_handler, [k1]},
             {"/bench/throughput/10k", random_data_handler, [k10]},
             {"/bench/throughput/100k", random_data_handler, [k100]},

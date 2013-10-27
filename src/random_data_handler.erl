@@ -21,9 +21,12 @@ init(_Type, Req, Args) ->
     {ok, Req, Args}.
 
 handle(Req, State) ->
+    {Method,Req2} = cowboy_req:method(Req),
+    HasBody = cowboy_req:has_body(Req2),
+    Body = cowboy_req:body(Req2),
     [Size] = State,
-    {ok, Req2} = cowboy_req:reply(200, [?MIME_TYPE], random_data(payload_size(Size)), Req),
-    {ok, Req2, State}.
+    {ok, Req3} = process(Method,HasBody,Body,Size,Req2),
+    {ok, Req3, State}.
 
 terminate(_Reason, _Req, _State) ->
     ok.
@@ -32,6 +35,21 @@ terminate(_Reason, _Req, _State) ->
 %% internal
 %%
 
+process(<<"GET">>,_HasBody,_Body,Size,Req) ->
+    cowboy_req:reply(200, [?MIME_TYPE], random_data(payload_size(Size)), Req);
+
+process(<<"POST">>,false,_Body,_Size,Req) ->
+    cowboy_req:reply(400, [], <<"Missing body.\n">>, Req);
+
+process(<<"POST">>,true,{ok, Body, _},Size,Req) ->
+    Size2 = payload_size(Size),
+    {Code, Msg} = case erlang:size(Body) of
+        Size2 -> {200, "" };
+        _ -> {400, "Incorrect body length.\n"}
+    end,
+    cowboy_req:reply(Code, [{<<"content-type">>, <<"application/octet-stream">>}], Msg , Req).
+
+payload_size(b128) -> 128;
 payload_size(k1) -> 1024;
 payload_size(k10) -> 10240;
 payload_size(k100) -> 102400;
