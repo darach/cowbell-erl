@@ -34,10 +34,10 @@ $ siege -b -c 128 http://localhost:8080/bench/throughput/1k
 Generate some data files:
 
 ```bash
-dd if=/dev/zero of=1m.dat bs=10485760 count=1
-dd if=/dev/zero of=100k.dat bs=102400 count=1
-dd if=/dev/zero of=10k.dat bs=10240 count=1
-dd if=/dev/zero of=1k.dat bs=1024 count=1
+dd if=/dev/urandom of=1m.dat bs=10485760 count=1
+dd if=/dev/urandom of=100k.dat bs=102400 count=1
+dd if=/dev/urandom of=10k.dat bs=10240 count=1
+dd if=/dev/urandom of=1k.dat bs=1024 count=1
 ````
 
 And you can also exercise HTTP POST:
