@@ -21,14 +21,14 @@ $ _rel/bin/cowbell foreground
 Use your favorite http benchmark client, example for HTTP GET:
 
 ```bash
-$ siege -b -c 1 http://localhost:8080/bench/througphut/1k
-$ siege -b -c 2 http://localhost:8080/bench/througphut/1k
-$ siege -b -c 4 http://localhost:8080/bench/througphut/1k
-$ siege -b -c 8 http://localhost:8080/bench/througphut/1k
-$ siege -b -c 16 http://localhost:8080/bench/througphut/1k
-$ siege -b -c 32 http://localhost:8080/bench/througphut/1k
-$ siege -b -c 64 http://localhost:8080/bench/througphut/1k
-$ siege -b -c 128 http://localhost:8080/bench/throughput/1k
+$ siege -b -c 1 -r 100 http://localhost:8080/bench/througphut/1k
+$ siege -b -c 2 -r 100 http://localhost:8080/bench/througphut/1k
+$ siege -b -c 4 -r 100 http://localhost:8080/bench/througphut/1k
+$ siege -b -c 8 -r 100 http://localhost:8080/bench/througphut/1k
+$ siege -b -c 16 -r 100 http://localhost:8080/bench/througphut/1k
+$ siege -b -c 32 -r 100 http://localhost:8080/bench/througphut/1k
+$ siege -b -c 64 -r 100 http://localhost:8080/bench/througphut/1k
+$ siege -b -c 128 -r 100 http://localhost:8080/bench/throughput/1k
 ```
 
 Generate some data files:
